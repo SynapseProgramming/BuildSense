@@ -1,11 +1,7 @@
 #include <Arduino.h>
 #include <DFRobot_BME280.h>
-#include <BMA220.h> 
+#include <BMA220.h>
 #include <Wire.h>
-byte Version[3];
-int8_t x_data;
-int8_t y_data;
-int8_t z_data;
 
 #define I2C_SDA 27
 #define I2C_SCL 26
@@ -17,7 +13,7 @@ typedef DFRobot_BME280_IIC BME; // ******** use abbreviations instead of full na
 
 BME *evnSensor;
 TwoWire I2C = TwoWire(0);
-BMA220 *accSensor; 
+BMA220 *accSensor;
 
 // show last sensor operate status
 void printLastOperateStatus(BME::eStatus_t eStatus)
@@ -44,7 +40,7 @@ void printLastOperateStatus(BME::eStatus_t eStatus)
 
 void setup()
 {
-  Serial.begin(115200); 
+  Serial.begin(115200);
   I2C.begin(I2C_SDA, I2C_SCL);
 
   evnSensor = new BME(&I2C, 0x77);
@@ -85,6 +81,8 @@ void loop()
   Serial.print("acc Y");
   Serial.println(accSensor->getY());
 
+  Serial.print("acc Z");
+  Serial.println(accSensor->getZ());
 
   delay(1000);
 }

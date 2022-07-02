@@ -39,3 +39,18 @@ int8_t BMA220::getY()
     }
     return (int8_t)yinp >> 2;
 }
+
+int8_t BMA220::getZ()
+{
+    byte zinp;
+    wire->beginTransmission(0x0A); // address of the accelerometer
+    // reset the accelerometer
+    wire->write(0x08); // Z data
+    wire->endTransmission();
+    wire->requestFrom(0x0A, 1); // request 6 bytes from slave device #2
+    while (wire->available())   // slave may send less than requested
+    {
+        zinp = wire->read(); // receive a byte as characte
+    }
+    return (int8_t)zinp >> 2;
+}
