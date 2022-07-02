@@ -75,14 +75,19 @@ void loop()
   Serial.println(humi);
   Serial.println("========  end print  ========");
 
-  Serial.print("acc X");
+  Serial.print("acc X: ");
   Serial.println(accSensor->getX());
 
-  Serial.print("acc Y");
+  Serial.print("acc Y: ");
   Serial.println(accSensor->getY());
 
-  Serial.print("acc Z");
+  Serial.print("acc Z: ");
   Serial.println(accSensor->getZ());
+
+  double micVoltage;
+  micVoltage = analogReadMilliVolts(MICPIN) * 1.0e-3;
+  Serial.print("Sound sensor Voltage: ");
+  Serial.println(micVoltage);
 
   delay(1000);
 }
