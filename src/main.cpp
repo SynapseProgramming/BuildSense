@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <DFRobot_BME280.h>
+#include <BMA220.h> 
 #include <Wire.h>
 byte Version[3];
 int8_t x_data;
@@ -16,6 +17,7 @@ typedef DFRobot_BME280_IIC BME; // ******** use abbreviations instead of full na
 
 BME *test;
 TwoWire I2C = TwoWire(0);
+BMA220 wow; 
 
 // show last sensor operate status
 void printLastOperateStatus(BME::eStatus_t eStatus)
@@ -74,6 +76,8 @@ void loop()
   Serial.print("humidity (unit percent):    ");
   Serial.println(humi);
   Serial.println("========  end print  ========");
+
+  wow.printTest();
 
   delay(1000);
 }
