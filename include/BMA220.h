@@ -9,11 +9,10 @@ public:
     BMA220(TwoWire *pWire);
 
     int8_t getX();
+    int8_t getY();
 
-    void printTest();
 
 private:
     TwoWire *wire;
 
-    int8_t x_data;
 };

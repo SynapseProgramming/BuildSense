@@ -15,7 +15,7 @@ int8_t z_data;
 
 typedef DFRobot_BME280_IIC BME; // ******** use abbreviations instead of full names ********
 
-BME *test;
+BME *evnSensor;
 TwoWire I2C = TwoWire(0);
 BMA220 *accSensor; 
 
@@ -47,12 +47,12 @@ void setup()
   Serial.begin(115200); 
   I2C.begin(I2C_SDA, I2C_SCL);
 
-  test = new BME(&I2C, 0x77);
+  evnSensor = new BME(&I2C, 0x77);
   accSensor = new BMA220(&I2C);
 
-  test->reset();
+  evnSensor->reset();
   Serial.println("bme read data test");
-  while (test->begin() != BME::eStatusOK)
+  while (evnSensor->begin() != BME::eStatusOK)
   {
     Serial.println("bme begin failed");
     delay(2000);
@@ -63,10 +63,10 @@ void setup()
 void loop()
 {
 
-  float temp = test->getTemperature();
-  uint32_t press = test->getPressure();
-  float alti = test->calAltitude(SEA_LEVEL_PRESSURE, press);
-  float humi = test->getHumidity();
+  float temp = evnSensor->getTemperature();
+  uint32_t press = evnSensor->getPressure();
+  float alti = evnSensor->calAltitude(SEA_LEVEL_PRESSURE, press);
+  float humi = evnSensor->getHumidity();
   Serial.println();
   Serial.println("======== start print ========");
   Serial.print("temperature (unit Celsius): ");
@@ -79,7 +79,11 @@ void loop()
   Serial.println(humi);
   Serial.println("========  end print  ========");
 
+  Serial.print("acc X");
   Serial.println(accSensor->getX());
+
+  Serial.print("acc Y");
+  Serial.println(accSensor->getY());
 
 
   delay(1000);
