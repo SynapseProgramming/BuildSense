@@ -17,7 +17,7 @@ typedef DFRobot_BME280_IIC BME; // ******** use abbreviations instead of full na
 
 BME *test;
 TwoWire I2C = TwoWire(0);
-BMA220 wow; 
+BMA220 *accSensor; 
 
 // show last sensor operate status
 void printLastOperateStatus(BME::eStatus_t eStatus)
@@ -48,6 +48,8 @@ void setup()
   I2C.begin(I2C_SDA, I2C_SCL);
 
   test = new BME(&I2C, 0x77);
+  accSensor = new BMA220(&I2C);
+
   test->reset();
   Serial.println("bme read data test");
   while (test->begin() != BME::eStatusOK)
@@ -77,7 +79,8 @@ void loop()
   Serial.println(humi);
   Serial.println("========  end print  ========");
 
-  wow.printTest();
+  Serial.println(accSensor->getX());
+
 
   delay(1000);
 }

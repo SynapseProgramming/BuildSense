@@ -1,12 +1,19 @@
 #pragma once
 #include <Arduino.h>
+#include <Wire.h>
 
-class BMA220 {
+class BMA220
+{
 
 public:
+    BMA220(TwoWire *pWire);
 
-void printTest();
+    int8_t getX();
 
+    void printTest();
 
+private:
+    TwoWire *wire;
 
+    int8_t x_data;
 };
